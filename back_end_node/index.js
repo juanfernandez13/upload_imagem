@@ -1,28 +1,9 @@
 import Express from "express";
-import uploadImage from "./middlewares/uploadimage.js";
+import upload from "./middlewares/uploadimage.js"
 import multer from "multer";
 import cors from "cors";
 
-const upload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, './public/upload/users')
-        },
-        filename: (req, file, cb) => {
-            cb(null, Date.now().toString() + "_" + file.originalname)  
-        }
-    }),
-    fileFilter: (req, file, cb) => {
-        const extensaoImg = ['image/png', 'image/jpg', 'image/jpeg'].find(formatoAceito => formatoAceito == file.mimetype);
-
-        if(extensaoImg){
-            return cb(null, true);
-        }
-
-        return cb(null, false);
-    }
-});
-
+const uploadImage = upload();
 const app = Express();
 const PORT = 8180;
 
@@ -35,7 +16,7 @@ app.use((req,res,next) => {
 })
 
 
-app.post("/upload-image", upload.single("image"), async(req, res) => {
+app.post("/upload-image", uploadImage.single("image"), async(req, res) => {
     console.log(req.file);
     if(req.file){
         return res.json({

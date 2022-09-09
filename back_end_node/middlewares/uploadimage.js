@@ -1,6 +1,6 @@
 import multer from "multer";
 
-multer({
+const upload = () => multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, './public/upload/users')
@@ -20,4 +20,4 @@ multer({
     }
 });
 
-export default multer;
+export default upload;
