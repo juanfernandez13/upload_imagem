@@ -1,6 +1,5 @@
 import Express from "express";
 import upload from "./middlewares/uploadimage.js"
-import multer from "multer";
 import cors from "cors";
 
 const uploadImage = upload();
