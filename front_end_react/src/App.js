@@ -39,6 +39,8 @@ function App() {
       <label htmlFor="">imagem: </label>
       <input type="file" name="imagem" onChange={e => setImage(e.target.files[0])}/> <br /> <br />
 
+      {image && <img alt="imagem enviada" src={URL.createObjectURL(image)}/>}
+
       <button type="submit">Salvar</button>
       </form>
     </div>
