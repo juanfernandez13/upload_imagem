@@ -1,12 +1,14 @@
 import multer from "multer";
+import imagens from "../models/imagensModel.js";
 
 const upload = () => multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, './public/upload/users')
+            cb(null, './public/')
         },
         filename: (req, file, cb) => {
-            cb(null, Date.now().toString() + "_" + file.originalname)  
+            cb(null, Date.now().toString().slice(1,6) + "_" + file.originalname)
+            imagens.push(Date.now().toString().slice(1,6) + "_" + file.originalname)  
         }
     }),
     fileFilter: (req, file, cb) => {

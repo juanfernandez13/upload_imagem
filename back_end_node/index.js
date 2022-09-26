@@ -1,11 +1,11 @@
-import Express from "express";
+import express from "express";
 import upload from "./middlewares/uploadimage.js"
 import cors from "cors";
 import fs from 'fs';
 import imagens from "./models/imagensModel.js";
 
 const uploadImage = upload();
-const app = Express();
+const app = express();
 const PORT = 8180;
 
 app.use((req,res,next) => {
@@ -15,7 +15,7 @@ app.use((req,res,next) => {
     app.use(cors());
     next();
 })
-
+app.use(express.json());
 
 app.post("/upload-image", uploadImage.single("image"), async(req, res) => {
     console.log(req.file);
@@ -35,7 +35,7 @@ app.post("/upload-image", uploadImage.single("image"), async(req, res) => {
 
 app.delete("/delete-image", (req,res) => {
     const {filename} = req.body;
-    console.log(imagens)
+    console.log(req.body)
     const indexImage =  imagens.findIndex( findImage => findImage == filename);
     console.log(indexImage)
     if(indexImage === -1){
@@ -46,7 +46,7 @@ app.delete("/delete-image", (req,res) => {
     });
     }
 
-    const pathImg = `C:/Users/Suporte/Downloads/upload_imagem-master/back_end_node/public/upload/users/${filename}`;
+    const pathImg = `C:/Users/Suporte/Documents/programacao/upload_imagem/back_end_node/public/${filename}`;
     fs.unlinkSync(pathImg);
     imagens.splice(indexImage,1);
     return res.status(200).json({
