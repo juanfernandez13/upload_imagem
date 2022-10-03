@@ -3,6 +3,7 @@ import upload from "./middlewares/uploadimage.js"
 import cors from "cors";
 import fs from 'fs';
 import imagens from "./models/imagensModel.js";
+import path from "path";
 
 const uploadImage = upload();
 const app = express();
@@ -16,6 +17,13 @@ app.use((req,res,next) => {
     next();
 })
 app.use(express.json());
+
+app.use('/file', express.static(path.resolve("C:/Users/Suporte/Documents/programacao/upload_imagem/back_end_node/public/")))
+app.use('/list-imagens', async(req,res) =>{
+    return res.json({
+         imagens
+    });
+});
 
 app.post("/upload-image", uploadImage.single("image"), async(req, res) => {
     console.log(req.file);
