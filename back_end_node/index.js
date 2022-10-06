@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/file', express.static(path.resolve("C:/Users/Suporte/Documents/programacao/upload_imagem/back_end_node/public/")))
 app.use('/list-imagens', async(req,res) =>{
     return res.json({
-         imagens
+        imagens
     });
 });
 
