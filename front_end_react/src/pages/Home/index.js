@@ -1,4 +1,4 @@
-import react, {useState} from 'react';
+import react, {useState, useEffect} from 'react';
 import api from "../../config/configApi.js"
 
 const Home = () => {
@@ -14,7 +14,8 @@ const Home = () => {
 
     const headers = {
       'headers': {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Acess-Control-Allow-Origin":"*"
       }
     }
 
@@ -32,7 +33,6 @@ const Home = () => {
   }
 
   const DeleteImage = async (name) =>{
-    console.log("deleteImage");
     const headers = {
       'headers': {
         'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ const Home = () => {
 
   }
 
-  const handleChange = async (event) =>{
+  const handleChange = async (event) => {
     setImageDelete(event.target.value);
   }
 

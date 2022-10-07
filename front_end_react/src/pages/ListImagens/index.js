@@ -11,13 +11,26 @@ const ListImagens = () => {
     }
     const getImages = async () => {
 
-        
+        const headers = {
+            'headers': {
+              'Content-Type': 'application/json',
+              "Accept":"*/*"
+            }
+          }
 
-        const response = await api.get("/list-imagens",{headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin':'*'
-          }});
-          console.log(response);
+    await api.get("/list-imagens",headers)
+    .then((response) => {
+      console.log(response);
+    }).catch((err) => {
+
+      if(err.response){
+        console.log(err.response);
+      }
+      else{
+        console.log("Erro: Tente mais tarde!");
+      }
+
+    });
     }
 
     useEffect(() =>{
