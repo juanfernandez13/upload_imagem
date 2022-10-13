@@ -12,18 +12,20 @@ const PORT = 8180;
 
 app.use(express.json());
 app.use('/file', express.static(path.resolve("C:/Users/Suporte/Documents/programacao/upload_imagem/back_end_node/public/")));
+app.use(cors({
+    origin: "http://localhost:3000",
+}))
 app.use((req,res,next) => {
     res.header("Acess-Control-Allow-Origin","*");
     res.header("Acess-Control-Allow-Methods","GET,POST,PUT,DELETE");
     res.header("Acess-Control-Allow-Headers","X-PINGOTHER, Content-Type, Authorization");
-    app.use(cors());
+    
     next();
 })
 
 app.get("/list-imagens", async(req,res) =>{
-    const response = await imagens;
     return res.json({
-        imagens:response
+        imagens
     });
 });
 
