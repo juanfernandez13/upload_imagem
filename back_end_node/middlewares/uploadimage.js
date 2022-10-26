@@ -7,8 +7,11 @@ const upload = () => multer({
             cb(null, './public/')
         },
         filename: (req, file, cb) => {
-            cb(null, Date.now().toString().slice(1,6) + "_" + file.originalname)
-            imagens.push(Date.now().toString().slice(1,6) + "_" + file.originalname)  
+            cb(null, Date.now().toString().slice(1,8) + "_" + file.originalname)
+            imagens.push({
+                nome:Date.now().toString().slice(1,8) + "_" + file.originalname,
+                visivel:true
+            })  
         }
     }),
     fileFilter: (req, file, cb) => {

@@ -5,6 +5,8 @@ import api from "../../config/configApi.js"
 const ListImagens = () => {
 
     const [image,setImage] = useState();
+    
+
     const getImages = async () => {
 
         const headers = {
@@ -16,6 +18,7 @@ const ListImagens = () => {
       await api.get("/list-imagens",headers)
       .then((response) => {
         setImage(response.data.imagens);
+        console.log(response.data.imagens)
       }).catch((err) => {
 
         if(err.response){
@@ -28,9 +31,6 @@ const ListImagens = () => {
       });
     }
 
-    useEffect(() =>{
-        getImages()
-    });
 
     return (
         <div>
